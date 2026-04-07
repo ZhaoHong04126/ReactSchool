@@ -1,0 +1,137 @@
+/* 設定全域亮色系色彩變數 */
+:root {
+    --primary: #4a90e2;
+    --bg: #f4f7f6;
+    --card: #ffffff;
+    --text-main: #333333;
+    --text-sub: #666666;
+    --border: #eeeeee;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --input-bg: #ffffff;
+}
+
+/* 設定深色模式對應的色彩變數 */
+[data-theme="dark"] {
+    --primary: #6ab0ff;   
+    --bg: #2c2c2c;        
+    --card: #424242;      
+    --text-main: #ffffff; 
+    --text-sub: #d0d0d0;  
+    --border: #555555;    
+    --danger: #ff867c;    
+    --warning: #ffd54f;
+    --input-bg: #5a5a5a;  
+}
+
+
+
+/* 頁面共用背景與漸層過渡動畫 */
+body {
+    margin: 0;
+    transition: background 0.5s ease;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow-x: hidden;
+}
+
+/* 首頁專屬背景漸層設定 */
+body[data-page="home"] { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); }
+body.dark-mode[data-page="home"] { background: #1a1a2e; }
+
+/* 課表頁面專屬背景漸層設定 */
+body[data-page="schedule"] { background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%); }
+body.dark-mode[data-page="schedule"] { background: #162447; } 
+
+/* 籤筒頁面專屬背景漸層設定 */
+body[data-page="lottery"] { background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); }
+body.dark-mode[data-page="lottery"] { background: #2d1b36; }
+
+/* 行事曆頁面專屬背景漸層設定 */
+body[data-page="calendar"] { background: linear-gradient(120deg, #f6d365 0%, #fda085 100%); }
+body.dark-mode[data-page="calendar"] { background: #3e2723; }
+
+/* 成績頁面專屬背景漸層設定 */
+body[data-page="grade-manager"] { background: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%); }
+body.dark-mode[data-page="grade-manager"] { background: #1b2e23; }
+
+/* 記帳頁面專屬背景漸層設定 */
+body[data-page="accounting"] { background: linear-gradient(120deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); }
+body.dark-mode[data-page="accounting"] { background: #331e21; }
+
+/* 紀念日頁面專屬背景漸層設定 */
+body[data-page="anniversary"] { background: linear-gradient(120deg, #ffdde1 0%, #ee9ca7 100%); }
+body.dark-mode[data-page="anniversary"] { background: #3a1c20; }
+
+/* 設定與資訊頁面專屬背景漸層設定 */
+body[data-page="settings"], body[data-page="info"] { background: linear-gradient(to top, #dfe9f3 0%, white 100%); }
+body.dark-mode[data-page="settings"], body.dark-mode[data-page="info"] { background: #121212; }
+
+/* 作業頁面專屬背景漸層設定 */
+body[data-page="homework"] { background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); }
+body.dark-mode[data-page="homework"] { background: #1e272e; }
+
+/* 成績計算筆記頁面專屬背景漸層設定 */
+body[data-page="grade-calc"] { background: linear-gradient(120deg, #e0c3fc 0%, #c2e9fb 100%); }
+body.dark-mode[data-page="grade-calc"] { background: #2a1b38; }
+
+
+
+/* 區塊標題共用樣式與底部邊框 */
+h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    border-bottom: 2px solid var(--bg);
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-main);
+}
+
+/* 彈出視窗的放大出現動畫 */
+@keyframes popIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* 共用卡片版型樣式 */
+.card {
+    background: var(--card) !important;
+    color: var(--text-main);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* 設定滾動條的整體尺寸 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+/* 設定滾動條的軌道 (滑槽背景) */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* 設定滾動條的拉桿 (可點擊拖曳的那塊) */
+::-webkit-scrollbar-thumb {
+    background: rgba(200, 200, 200, 0.5);
+    border-radius: 10px;
+}
+
+/* 設定滑鼠懸浮在拉桿上時的視覺回饋 */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(160, 160, 160, 0.8);
+}
+
+/* 深色模式下的滾動條拉桿 (改用較暗的半透明灰色，避免在深色背景下太過刺眼) */
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: rgba(100, 100, 100, 0.5);
+}
+
+/* 深色模式下，滑鼠懸浮在拉桿上時的變化 */
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(150, 150, 150, 0.8);
+}

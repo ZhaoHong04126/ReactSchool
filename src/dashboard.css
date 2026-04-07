@@ -1,0 +1,239 @@
+/* 首頁上方工具列/儀表板區塊容器 */
+.home-widgets-container {
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+
+/* 目前學期資訊與切換操作的橫向卡片 */
+.semester-widget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    flex-wrap: wrap;
+}
+
+
+
+/* 學期資訊左側 (圖示與文字) 區塊容器 */
+.semester-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* 學期資訊左側圖示背景 */
+.widget-icon {
+    font-size: 2rem;
+    background: #e3f2fd;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+/* 學期資訊文字垂直排列容器 */
+.widget-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* 學期資訊文字的上方小標題 */
+.widget-label {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 選擇目前學期的無邊框下拉選單 */
+.semester-widget .semester-select {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary);
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    min-width: 100px;
+}
+
+
+
+/* 學期右側操作區塊 (包含新增、修改名稱、刪除等按鈕) */
+.semester-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+/* 學期操作區塊的方形小圖示按鈕 */
+.semester-actions .btn-icon {
+    background: var(--bg);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    transition: transform 0.2s;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.semester-actions .btn-icon:hover {
+    transform: translateY(-2px);
+    background: #e0e0e0;
+}
+
+/* 綠色的新增學期按鈕樣式 */
+.semester-actions .btn-new-sem {
+    padding: 8px 16px;
+    border-radius: 10px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+
+
+/* 手機版學期工具列排版調整，改為垂直排列 */
+@media (max-width: 767px) {
+    .semester-widget { flex-direction: column; align-items: stretch; gap: 15px; }
+    .semester-actions { width: 100%; justify-content: space-between; border-top: 1px dashed var(--border); padding-top: 15px; }
+    .semester-actions .btn-new-sem { flex: 1; }
+}
+
+/* 電腦版學期工具列兩側留白與邊距調整 */
+@media (min-width: 768px) {
+    .home-widgets-container { padding: 0 40px; margin-top: 20px; }
+}
+
+
+/* =========================================
+   管理員後台功能網格排版 (左 1~4 垂直直排，右 5 佔滿)
+   ========================================= */
+.admin-dashboard-grid {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* --- 💻 電腦版排版 (大螢幕) --- */
+@media (min-width: 1024px) {
+    /* 判斷是上方的 1~5 區塊 (有包含模組開關) */
+    .admin-dashboard-grid:has(.card-module) {
+        /* 將畫面切為兩欄：左邊放 1~4，右邊放 5 (右邊稍微寬一點點) */
+        grid-template-columns: 1fr 1.2fr; 
+    }
+    
+    /* 強制將 1~4 項全部塞進左邊「第 1 欄」，它們會自動往下疊成 4 個 */
+    .admin-dashboard-grid:has(.card-module) > :not(.card-module) {
+        grid-column: 1;
+    }
+
+    /* 強制將第 5 個「模組開關」放在右邊「第 2 欄」，並讓它向下跨越 4 行的高度 */
+    .admin-dashboard-grid .card-module {
+        grid-column: 2;
+        grid-row: 1 / span 4;
+        height: 100%; /* 讓它高度填滿右側 */
+    }
+
+    /* 判斷是下方的 6~8 區塊 (沒有模組開關)，維持 3 欄並排 */
+    .admin-dashboard-grid:not(:has(.card-module)) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- 📱 平板版排版 --- */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .admin-dashboard-grid:has(.card-module) {
+        grid-template-columns: 1fr 1fr; /* 平板一半一半 */
+    }
+    .admin-dashboard-grid:has(.card-module) > :not(.card-module) {
+        grid-column: 1;
+    }
+    .admin-dashboard-grid .card-module {
+        grid-column: 2;
+        grid-row: 1 / span 4;
+    }
+    .admin-dashboard-grid:not(:has(.card-module)) {
+        grid-template-columns: 1fr; /* 平板的 6~8 區塊改為上下排列比較清楚 */
+    }
+}
+
+/* --- 📱 手機版排版 --- */
+@media (max-width: 767px) {
+    .admin-dashboard-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .admin-dashboard-grid > div {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+    }
+}
+
+/* =========================================
+   以下為卡片基礎外觀 (維持不變)
+   ========================================= */
+.admin-feature-card {
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.admin-feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+    border-color: #e0e0e0;
+}
+
+.admin-feature-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+}
+
+.admin-feature-card p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 針對不同功能的專屬配色 */
+.card-status h3 { color: #2ecc71; } 
+.card-update h3 { color: #3498db; } 
+.card-news h3 { color: #e67e22; }   
+.card-push h3 { color: #9b59b6; }   
+
+/* 模組功能開關特別醒目顯示 */
+.card-module { background: #fffcf3; border-color: #fdebd0; cursor: default; }
+.card-module h3 { color: #f39c12; border-bottom-style: solid; }
+.card-module:hover { transform: none; box-shadow: none; background: #fffcf3; }

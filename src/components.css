@@ -1,0 +1,605 @@
+/* 共用卡片版型樣式 (包含背景、圓角與陰影) */
+.card {
+    background: var(--card) !important;
+    color: var(--text-main);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+
+/* 表格基礎共用樣式與字型設定 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* 表格儲存格與表頭內距設定 */
+th, td {
+    padding: 10px 4px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    font-size: 0.85rem;
+    word-break: break-all;
+}
+
+/* 表格表頭文字與背景樣式 */
+th {
+    color: #555;
+    font-weight: 600;
+    background-color: #fafafa;
+    white-space: nowrap;
+}
+
+/* 移除表格最後一列的底線 */
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* 表格無資料時的預設提示樣式 */
+.no-class {
+    padding: 20px;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+
+
+/* 共用按鈕基礎樣式 */
+.btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* 佔滿寬度的新增按鈕樣式 */
+.btn-add {
+    width: 100%;
+    margin-top: 10px;
+    background: #eef2f5;
+    color: #333;
+    padding: 12px;
+    font-weight: bold;
+}
+
+/* 帶有圖示的方形小按鈕 */
+.btn-icon {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 紅色系的刪除按鈕 */
+.btn-delete {
+    background: #ffebee;
+    color: #e74c3c;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* 橘黃色系的編輯按鈕 */
+.btn-edit {
+    background: #fff3e0;
+    color: #f39c12;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+
+/* 佔滿寬度的主題色主要按鈕 */
+.btn-primary {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+
+
+/* 表單輸入框群組的垂直排版 */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* 輸入框上方的小標籤說明文字 */
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 基礎文字/數字輸入框樣式 */
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+
+
+/* 課程或清單列表項目排版 (常見於彈窗內的列表) */
+.course-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* 清單項目左側文字資訊區塊 */
+.course-info {
+    text-align: left;
+}
+
+/* 清單項目主標題 */
+.course-name {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* 清單項目副標題或時間 */
+.course-time {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+
+
+/* 彈出視窗全螢幕半透明遮罩 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* 彈出視窗主要內容白色區塊 */
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    width: 85%;
+    max-width: 350px;
+    animation: popIn 0.3s;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 彈出視窗內的共用大型操作按鈕 */
+.modal-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid var(--primary);
+    background: white;
+    color: var(--primary);
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+
+
+/* 側邊/底部導覽列按鈕基本樣式 */
+.nav-btn {
+    background: transparent;
+    color: #999;
+    border: none;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+}
+
+/* 手機版導覽列按鈕排版 (圖上文下) */
+@media (max-width: 767px) {
+    .nav-btn {
+        flex-direction: column;
+        padding: 8px 0;
+        font-size: 0.8rem;
+        width: auto;
+        justify-content: center;
+    }
+    .nav-btn .icon {
+        font-size: 1.4rem;
+        margin-bottom: 2px;
+    }
+    .nav-btn.active {
+        color: var(--primary);
+        font-weight: bold;
+        background: transparent;
+    }
+}
+
+/* 電腦版導覽列按鈕排版 (圖左文右) 與懸浮效果 */
+@media (min-width: 768px) {
+    .nav-btn {
+        color: #666;
+    }
+    .nav-btn .icon {
+        margin-right: 12px;
+        width: 24px;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .nav-btn .text {
+        display: inline;
+    }
+    .nav-btn:hover {
+        background-color: #f0f5ff;
+        color: var(--primary);
+    }
+    .nav-btn.active {
+        background-color: #e6f0ff;
+        color: var(--primary);
+        font-weight: bold;
+    }
+    .btn-logout {
+        color: #e74c3c;
+    }
+    .btn-logout:hover {
+        background-color: #fff0f0;
+        color: #c0392b;
+    }
+}
+
+
+
+/* 週課表網格表格外觀 */
+.weekly-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+/* 讓週課表的表頭固定在最上方 */
+.weekly-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 2px solid #ddd;
+}
+
+/* 課表格子的過渡動畫 */
+.weekly-table td { transition: background 0.2s; }
+
+/* 課表格子的懸浮變暗效果 */
+.weekly-table td:hover { filter: brightness(0.95); }
+
+
+
+/* 切換分頁(Tabs)區塊容器，支援水平滑動 */
+.week-tabs {
+    display: flex;
+    margin-bottom: 15px;
+    background: #eef2f5;
+    padding: 5px 5px 8px 5px;
+    border-radius: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 4px;
+}
+
+/* 分頁區塊滾動條自訂樣式 */
+.week-tabs::-webkit-scrollbar { height: 6px; }
+
+/* 分頁區塊滾動條軌道自訂樣式 */
+.week-tabs::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+    margin: 0 5px;
+}
+
+/* 分頁區塊滾動條拉桿自訂樣式 */
+.week-tabs::-webkit-scrollbar-thumb {
+    background: #cdd4d9;
+    border-radius: 8px;
+}
+
+/* 分頁區塊滾動條拉桿懸浮樣式 */
+.week-tabs::-webkit-scrollbar-thumb:hover { background: #aab2b8; }
+
+/* 單一切換分頁按鈕 */
+.tab-btn {
+    flex: 1 0 auto;
+    border: none;
+    background: transparent;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #666;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+/* 單一切換分頁按鈕啟用狀態 */
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* 記帳的綠色收入標籤徽章 */
+.badge-income {
+    background-color: #e8f5e9;
+    color: #2ecc71;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-right: 5px;
+}
+
+/* 記帳的紅色支出標籤徽章 */
+.badge-expense {
+    background-color: #ffebee;
+    color: #e74c3c;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-right: 5px;
+}
+
+
+
+/* 課表連選模式中被選取的格子高亮外觀 */
+.cell-selected {
+    background-color: #b2dfdb !important;
+    border: 2px solid #009688 !important;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 150, 136, 0.3);
+}
+
+/* 課表單格滑鼠懸浮效果 */
+#weekly-schedule-body td:hover { background-color: #fafafa; }
+
+/* 課表選取中格子的滑鼠懸浮效果 */
+#weekly-schedule-body td.cell-selected:hover { background-color: #b2dfdb; }
+
+
+
+/* 表格列的底線分隔 */
+tr.period-time-row { border-bottom: 1px solid var(--border); }
+
+/* 移除最後一列的底線分隔 */
+tr.period-time-row:last-child { border-bottom: none; }
+
+/* 讓輸入框自動撐滿所在欄位 (td) 的寬度，不會破版 */
+.period-name-input, .period-time-input {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--text-main);
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 6px 2px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+/* 取消原本特別寫死的高度，讓時間輸入框保持簡潔 */
+.period-time-input { font-weight: normal; }
+
+/* 點擊時的發光效果 */
+.period-name-input:focus, .period-time-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+/* 深色模式適配：文字與背景色 */
+[data-theme="dark"] .period-name-input,
+[data-theme="dark"] .period-time-input {
+    border: 1px solid #666;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* 深色模式適配：表格列底線 */
+[data-theme="dark"] tr.period-time-row { border-bottom: 1px solid #444; }
+
+
+
+/* 新增：顏色選擇圓點樣式 */
+.color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s, border-color 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.color-swatch:active { transform: scale(0.9); }
+.color-swatch.selected {
+    border-color: #555;
+    transform: scale(1.15);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* 表單基礎文字輸入框 (供 app.html 內多處彈出視窗使用) */
+.login-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background: var(--bg-light);
+    outline: none;
+    transition: all 0.3s ease;
+}
+.login-input:focus {
+    background: white; 
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* 確保在最上層 */
+}
+.modal-content.warning-theme {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  border-top: 5px solid #ff9800; /* 橘色警告感 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.time-box {
+  background: #fdf5e6;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 16px 0;
+  color: #d84315;
+}
+
+/* 更新提示框的背景遮罩 */
+.update-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* 確保在最上層 */
+  backdrop-filter: blur(2px);
+}
+
+/* 提示框主體 */
+.update-modal-content {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: slideUpFade 0.3s ease-out forwards;
+}
+
+/* 頭部區域 */
+.update-modal-header {
+  background-color: #4a90e2; /* 可改成你的主色調 */
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.update-modal-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.close-update-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* 內容區域 */
+.update-modal-body {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.update-modal-body ul {
+  padding-left: 20px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.update-modal-body li {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* 底部按鈕區域 */
+.update-modal-footer {
+  padding: 16px 20px;
+  text-align: right;
+  border-top: 1px solid #eee;
+}
+
+.update-modal-footer .btn-primary {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* 動畫效果 */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

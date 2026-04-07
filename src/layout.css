@@ -1,0 +1,150 @@
+#top-bar {
+    height: 60px;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+#app-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.main-content {
+    flex: 1;
+    padding: 15px;
+    padding-bottom: 80px;
+    max-width: 100%;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* 手機版漢堡選單按鈕顯示控制 */
+@media (min-width: 900px) {
+    #mobile-menu-btn { display: none !important; }
+}
+
+/* 側邊欄：手機版抽屜樣式 (預設隱藏在畫面左外側) */
+.desktop-sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    left: -300px;
+    width: 260px;
+    height: calc(100vh - 60px);
+    background: white;
+    z-index: 2000;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+}
+
+.desktop-sidebar.show {
+    left: 0;
+}
+
+/* 側邊欄遮罩：手機版專用 (點擊空白處關閉) */
+#sidebar-overlay {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+#sidebar-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 左側導覽按鈕樣式 */
+.sidebar-nav { display: flex; flex-direction: column; gap: 8px; }
+
+.nav-item {
+    background: transparent; border: none; padding: 12px 15px; text-align: left;
+    border-radius: 10px; font-size: 0.95rem; color: var(--text-sub);
+    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px;
+}
+.nav-item:hover {
+    background: #f4f7f6; color: var(--primary); transform: translateX(5px);
+}
+.nav-item.active {
+    background: #e3f2fd; color: var(--primary); font-weight: bold; border-left: 4px solid var(--primary); border-top-left-radius: 0; border-bottom-left-radius: 0;
+}
+
+/* 深色模式適配 */
+[data-theme="dark"] .desktop-sidebar { background: var(--card); border-right-color: var(--border); }
+[data-theme="dark"] .nav-item:hover { background: rgba(255,255,255,0.05); }
+[data-theme="dark"] .nav-item.active { background: rgba(106, 176, 255, 0.15); color: #6ab0ff; border-left-color: #6ab0ff; }
+
+/* 當螢幕寬度大於 900px (平板/電腦) 時，啟動雙欄排版並取消抽屜效果 */
+@media (min-width: 900px) {
+    body { overflow: hidden; padding-bottom: 0; }
+
+    .dashboard-container {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        padding-top: 60px;
+        overflow: hidden;
+    }
+
+    /* 側邊欄樣式 (覆蓋 fixed 變成固定並排) */
+    .desktop-sidebar {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 280px;
+        min-width: 280px;
+        height: auto;
+        background: white;
+        border-right: 1px solid var(--border);
+        padding: 25px 20px;
+        box-shadow: none;
+        transition: none;
+    }
+    
+    /* 電腦版不需要半透明遮罩 */
+    #sidebar-overlay {
+        display: none !important;
+    }
+
+    /* 右側主內容區自適應填滿剩餘空間 */
+    .main-content {
+        flex: 1;
+        padding: 30px 40px;
+        overflow-y: auto;
+        height: 100%; 
+        min-height: 0;
+        padding-bottom: 20px;
+    }
+}

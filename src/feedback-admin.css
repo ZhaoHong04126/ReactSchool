@@ -1,0 +1,222 @@
+/* ==================================================
+   管理者：回饋管理頁面專用樣式
+   ================================================== */
+
+/* 整體 View 區塊增加細微背景層次與圓角 */
+#view-admin-feedback {
+    background-color: rgba(255, 255, 255, 0.03); /* 極淡背景，增加層次 */
+    border-radius: 12px;
+    padding: 20px;
+}
+
+/* 控制按鈕區域靠右 */
+#view-admin-feedback .admin-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+/* 優化「🔄 重新載入列表」按鈕樣式 */
+#view-admin-feedback .btn-secondary {
+    background-color: transparent;
+    border: 1.5px solid #555;
+    color: #e0e0e0;
+    border-radius: 20px; /* 圓角 */
+    padding: 8px 18px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px; /* 圖示與文字間距 */
+}
+
+#view-admin-feedback .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #fff;
+    transform: translateY(-1px);
+}
+
+/* 表格基本美化 */
+#view-admin-feedback .data-table {
+    table-layout: fixed; /* 固定欄寬 */
+}
+
+/* 表頭樣式：更深色、更扁平化 */
+#view-admin-feedback .data-table thead th {
+    background-color: #1a1a1a;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+    padding: 12px 15px;
+    border-bottom: 2px solid #333;
+}
+
+/* 增加行懸停效果，方便閱讀 */
+#view-admin-feedback .data-table tbody tr {
+    transition: background-color 0.2s;
+}
+
+#view-admin-feedback .data-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#view-admin-feedback .data-table td {
+    padding: 15px; /* 增加單元格內邊距 */
+    border-bottom: 1px solid #333;
+    vertical-align: middle;
+    color: #e0e0e0;
+}
+
+/* 針對「UID」欄位的優化：限制欄寬，並加上完整 title */
+#view-admin-feedback .data-table td:nth-child(2) {
+    color: #95a5a6; /* 灰 */
+    font-size: 0.9em;
+    cursor: help;
+}
+
+/* 针对「時間」欄位的優化：白字 */
+#view-admin-feedback .data-table td:first-child {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* ==================================================
+   通用標籤 (Badge) 樣式
+   ================================================== */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    gap: 4px; /* 圖示與文字間距 */
+}
+
+/* --- 類型 (Type) 標籤 --- */
+.badge-type-bug {
+    background-color: rgba(231, 76, 60, 0.15); /* 紅色底 */
+    color: #e74c3c; /* 紅色字 */
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.badge-type-suggestion {
+    background-color: rgba(241, 196, 15, 0.15); /* 黃色底 */
+    color: #f1c40f; /* 黃色字 */
+    border: 1px solid rgba(241, 196, 15, 0.3);
+}
+
+.badge-type-other {
+    background-color: rgba(149, 165, 166, 0.15); /* 灰色底 */
+    color: #95a5a6; /* 灰色字 */
+    border: 1px solid rgba(149, 165, 166, 0.3);
+}
+
+/* --- 狀態 (Status) 標籤 --- */
+.badge-status-pending {
+    background-color: rgba(192, 57, 43, 0.2); /* 深紅底 */
+    color: #e74c3c; /* 紅字 */
+    border: 1px solid rgba(192, 57, 43, 0.4);
+}
+
+.badge-status-processing {
+    background-color: rgba(230, 126, 34, 0.2); /* 橘底 */
+    color: #e67e22; /* 橘字 */
+    border: 1px solid rgba(230, 126, 34, 0.4);
+}
+
+.badge-status-resolved {
+    background-color: rgba(46, 204, 113, 0.2); /* 綠底 */
+    color: #2ecc71; /* 綠字 */
+    border: 1px solid rgba(46, 204, 113, 0.4);
+}
+
+/* ==================================================
+   優化後的下拉選單樣式
+   ================================================== */
+#view-admin-feedback .feedback-status-select {
+    background-color: #2a2a2a; /* 深色背景 */
+    border: 1px solid #555;
+    color: #e0e0e0;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.85em;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%; /* 填滿單元格 */
+    box-sizing: border-box;
+}
+
+#view-admin-feedback .feedback-status-select:focus {
+    border-color: #3498db; /* 聚焦時顯示藍色 */
+}
+
+#view-admin-feedback .feedback-status-select:hover {
+    border-color: #fff;
+}
+
+/* ==================================================
+   意見回饋 Modal：輸入框捲軸與高度設定
+   ================================================== */
+#feedback-content {
+    width: 100%;
+    height: 120px;
+    overflow-y: auto;
+    resize: none;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transition: border-color 0.3s ease;
+}
+
+/* 當使用者點擊輸入框時，邊框變色提示 */
+#feedback-content:focus {
+    outline: none;
+    border-color: var(--primary, #3498db);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+
+/* 針對小螢幕 (例如手機、平板) 的表格滑動設定 */
+@media screen and (max-width: 768px) {
+    
+    /* 1. 設定外層容器，使其可以水平滑動 */
+    #view-admin-feedback .table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        
+        /* 視覺優化：可以在滑動區域加一點陰影或邊界，讓使用者知道可以滑動 (非必要) */
+        border: 1px solid #eee; 
+        border-radius: 8px;
+    }
+
+    /* 2. 確保表格不會被強行擠壓，設定一個安全的最小寬度 */
+    #view-admin-feedback .data-table {
+        min-width: 700px;
+        width: 100%;
+    }
+
+    /* 3. 防止短資料欄位不自然換行 (例如時間、狀態、操作) */
+    #view-admin-feedback .data-table th,
+    #view-admin-feedback .data-table td {
+        white-space: nowrap; 
+    }
+
+    /* 4. 特別處理「內容」欄位 (第4欄)：因為回饋內容可能很長，允許它換行並設定最小寬度 */
+    #view-admin-feedback .data-table td:nth-child(4),
+    #view-admin-feedback .data-table th:nth-child(4) {
+        white-space: normal;
+        min-width: 250px;
+    }
+}

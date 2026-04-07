@@ -1,0 +1,235 @@
+/* 行事曆頁面主容器底部留白 */
+#view-calendar {
+    padding-bottom: 20px;
+}
+
+/* 行事曆頂部控制列 (包含月份切換與標題) */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* 行事曆七天網格排版，設定最小寬度避免擠壓 */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+    min-width: 600px;
+}
+
+/* 行事曆頂部的星期幾標題列 */
+.cal-day-header {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #888;
+    padding-bottom: 8px;
+}
+
+
+
+/* 單一日期的格子基礎樣式 (包含高度、邊框與內部元素排列) */
+.cal-day {
+    min-height: 100px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    position: relative;
+    padding: 4px;
+    background: #fff;
+    border: 1px solid #000;
+}
+
+/* 行事曆單一日期的格子滑鼠懸浮效果 */
+.cal-day:hover {
+    background-color: #f0f8ff;
+    border: 1px solid var(--primary);
+}
+
+/* 行事曆深色模式下的單一日期的格子背景 */
+[data-theme="dark"] .cal-day {
+    background: var(--card);
+    border: 1px solid var(--border);
+}
+
+/* 特別標註「今天」的格子外框與樣式 */
+.cal-today {
+    background-color: #fff;
+    border: 2px solid var(--primary);
+    color: var(--text-main);
+}
+
+/* 日期數字的圓形外觀與置中 */
+.cal-date-num {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    align-self: center;
+    border-radius: 50%;
+}
+
+/* 特別標註「今天」的日期數字背景色 */
+.cal-today .cal-date-num {
+    background: var(--primary);
+    color: white;
+}
+
+/* 非本月份的日期文字顏色調淡 */
+.cal-other-month {
+    color: #ddd;
+}
+
+
+
+/* 連續多日活動的色塊基礎樣式 (避免文字截斷) */
+.cal-event-bar {
+    font-size: 0.75rem;
+    background-color: var(--primary);
+    color: white;
+    padding: 2px 4px;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    text-align: left;
+    height: 18px;
+    line-height: 18px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+/* 單日活動色塊的圓角設定 */
+.cal-event-bar.single {
+    border-radius: 4px;
+}
+
+/* 連續活動起始日的色塊左側圓角 */
+.cal-event-bar.start {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+/* 連續活動結束日的色塊右側圓角 */
+.cal-event-bar.end {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+/* 連續活動中間日的色塊取消圓角 */
+.cal-event-bar.middle {
+    border-radius: 0;
+}
+
+/* 連續活動色塊向右連接，抵銷網格間距以完美銜接 */
+.cal-event-bar.connect-right {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: -10px !important;
+    padding-right: 10px !important;
+    z-index: 2;
+}
+
+/* 連續活動色塊向左連接，隱藏文字並貼合邊緣 */
+.cal-event-bar.connect-left {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -5px !important;
+    padding-left: 5px !important;
+    color: transparent;
+}
+
+/* 跨週第一天強制顯示連續活動文字 */
+.cal-event-bar.connect-left.show-text {
+    color: white;
+}
+
+/* 針對「今天」格子的特別修正，因邊框較粗需多扣 1px (向右) */
+.cal-today .cal-event-bar.connect-right {
+    margin-right: -11px !important;
+    padding-right: 11px !important;
+}
+
+/* 針對「今天」格子的特別修正，因邊框較粗需多扣 1px (向左) */
+.cal-today .cal-event-bar.connect-left {
+    margin-left: -6px !important;
+    padding-left: 6px !important;
+}
+
+
+
+/* 單日或特定時間活動的純文字顯示樣式 */
+.cal-event-time {
+    background-color: transparent;
+    color: #1565c0;
+    font-size: 0.75rem;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+    cursor: pointer;
+    padding: 1px 2px;
+    border-radius: 4px;
+}
+
+/* 單日或特定時間活動文字的滑鼠懸浮效果 */
+.cal-event-time:hover {
+    background-color: #e3f2fd;
+}
+
+/* 單日活動文字前方的圓點圖示 */
+.cal-event-time .time-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+/* 深色模式下單日/時間活動的文字顏色 */
+[data-theme="dark"] .cal-event-time {
+    color: #8ecae6;
+}
+
+/* 深色模式下單日/時間活動的滑鼠懸浮背景色 */
+[data-theme="dark"] .cal-event-time:hover {
+    background-color: #3a506b;
+}
+
+/* 深色模式下行事曆事件的備用文字顏色樣式 */
+[data-theme="dark"] .cal-event-text {
+    background-color: #3a506b;
+    color: #8ecae6;
+}
+
+
+
+/* 日期下方顯示有事件的小紅點指示器 */
+.cal-dot {
+    width: 5px;
+    height: 5px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    margin-top: 2px;
+}
+
+/* 「今天」日期下方的事件指示器改為白色，以凸顯對比 */
+.cal-today .cal-dot {
+    background-color: white;
+}

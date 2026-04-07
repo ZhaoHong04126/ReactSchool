@@ -1,0 +1,30 @@
+/* 設定頁面的列表容器，採垂直彈性排版 */
+.settings-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 設定清單單一項目的排版、底線與過渡效果 */
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+/* 移除設定清單最後一個項目的底線 */
+.settings-item:last-child { border-bottom: none; }
+
+/* 設定項目點擊時的背景回饋效果 */
+.settings-item:active { background-color: #f9f9f9; }
+
+/* 設定項目的左側圖示間距與大小 */
+.settings-icon { margin-right: 10px; font-size: 1.2rem; }
+
+/* 設定項目的右側箭頭圖示顏色與大小 */
+.settings-arrow { color: #ccc; font-size: 0.9rem; }
