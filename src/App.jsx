@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
-import { auth, provider } from './firebase';
-import { 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
-  signInWithPopup, 
-  signInAnonymously, 
-  sendPasswordResetEmail,
-  setPersistence,
-  browserLocalPersistence,
-  browserSessionPersistence,
-  onAuthStateChanged
-} from 'firebase/auth';
+import { supabase } from './supabase';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -28,21 +17,30 @@ function App() {
       document.body.setAttribute('data-page', 'home');
     }
 
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
       if (currentUser) {
-        setUser(currentUser); // 登入成功，儲存使用者狀態
-        window.location.hash = '#/app'; // 更新網址 hash
-      } else {
-        setUser(null);
+        window.location.hash = '#/app';
       }
       setLoading(false);
     });
-    return () => unsubscribe();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+      if (currentUser) {
+        window.location.hash = '#/app';
+      }
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, [user]);
 
   const handleLogout = async () => {
     try {
-      await auth.signOut();
+      await supabase.auth.signOut();
       window.location.hash = ''; // 清除 hash
     } catch (error) {
       alert("登出失敗：" + error.message);
@@ -54,11 +52,13 @@ function App() {
       alert("請輸入 Email 和密碼");
       return;
     }
-    const persistence = remember ? browserLocalPersistence : browserSessionPersistence;
     
     try {
-      await setPersistence(auth, persistence);
-      await signInWithEmailAndPassword(auth, email, password);
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) throw error;
     } catch (error) {
       alert("登入失敗：" + error.message);
     }
@@ -70,7 +70,11 @@ function App() {
       const regPassword = prompt("請設定密碼 (至少6個字元)：");
       if (regPassword) {
         try {
-          await createUserWithEmailAndPassword(auth, regEmail, regPassword);
+          const { error } = await supabase.auth.signUp({
+            email: regEmail,
+            password: regPassword,
+          });
+          if (error) throw error;
           alert("🎉 註冊成功！系統將自動登入。");
         } catch (error) {
           alert("註冊失敗：" + error.message);
@@ -81,7 +85,10 @@ function App() {
 
   const loginWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, provider);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      });
+      if (error) throw error;
     } catch (error) {
       alert("Google 登入錯誤：" + error.message);
     }
@@ -89,7 +96,8 @@ function App() {
 
   const loginAnonymously = async () => {
     try {
-      await signInAnonymously(auth);
+      const { error } = await supabase.auth.signInAnonymously();
+      if (error) throw error;
     } catch (error) {
       alert("匿名登入錯誤：" + error.message);
     }
@@ -102,7 +110,8 @@ function App() {
     }
     if (window.confirm(`確定要寄送重設密碼信件至 ${email} 嗎？`)) {
       try {
-        await sendPasswordResetEmail(auth, email);
+        const { error } = await supabase.auth.resetPasswordForEmail(email);
+        if (error) throw error;
         alert("📧 重設信已寄出！請檢查信箱。");
       } catch (error) {
         alert("發送失敗：" + error.message);

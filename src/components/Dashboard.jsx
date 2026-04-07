@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { db } from '../firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { supabase } from '../supabase';
 import Schedule from '../pages/Schedule';
 import Accounting from '../pages/Accounting';
 import Calendar from '../pages/Calendar';
@@ -34,13 +33,15 @@ export default function Dashboard({ user, handleLogout }) {
     }
     setIsSubmitting(true);
     try {
-      await addDoc(collection(db, "feedbacks"), {
-        uid: user ? user.uid : "anonymous",
-        type: feedbackType,
-        content: feedbackContent,
-        status: "pending",
-        timestamp: serverTimestamp()
-      });
+      const { error } = await supabase
+        .from('feedbacks')
+        .insert([{
+          uid: user ? (user.id || user.uid) : "anonymous",
+          type: feedbackType,
+          content: feedbackContent,
+          status: "pending"
+        }]);
+      if (error) throw error;
       alert("感謝您的回饋！我們已經收到囉。");
       setFeedbackContent('');
       setIsFeedbackOpen(false);

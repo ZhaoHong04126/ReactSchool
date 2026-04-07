@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { auth } from '../firebase';
-import { signOut } from 'firebase/auth';
+import { supabase } from '../supabase';
 import { useData } from '../context/DataContext';
 
 export default function Settings() {
@@ -64,7 +63,7 @@ export default function Settings() {
   const handleLogout = async () => {
     if (window.confirm("確定要登出嗎？")) {
       try {
-        await signOut(auth);
+        await supabase.auth.signOut();
       } catch (err) {
         alert("登出失敗: " + err.message);
       }

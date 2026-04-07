@@ -1,7 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { db, auth } from '../firebase';
-import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { onAuthStateChanged } from 'firebase/auth';
+import { supabase } from '../supabase';
 
 const DataContext = createContext();
 
@@ -29,15 +27,16 @@ export const DataProvider = ({ children }) => {
   const [userSchoolInfo, setUserSchoolInfo] = useState({ school: '', department: '' });
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      const currentUser = session?.user ?? null;
       setUser(currentUser);
       if (currentUser) {
-        await loadData(currentUser.uid);
+        await loadData(currentUser.id);
       } else {
         setIsDataLoaded(false);
       }
     });
-    return () => unsubscribe();
+    return () => subscription.unsubscribe();
   }, []);
 
   const loadData = async (uid) => {
@@ -65,17 +64,22 @@ export const DataProvider = ({ children }) => {
 
   const syncFromCloud = async (uid) => {
     try {
-      const docRef = doc(db, "users", uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        parseAndApplyData(docSnap.data());
+      const { data, error } = await supabase
+        .from('users')
+        .select('data')
+        .eq('id', uid)
+        .single();
+        
+      if (data && data.data) {
+        parseAndApplyData(data.data);
         const dbKey = 'CampusKing_v3.8.0_' + uid;
-        localStorage.setItem(dbKey, JSON.stringify(docSnap.data()));
+        localStorage.setItem(dbKey, JSON.stringify(data.data));
       } else {
         initDefaultData();
       }
     } catch (error) {
       console.error("同步失敗:", error);
+      initDefaultData();
     }
   };
 
@@ -150,12 +154,16 @@ export const DataProvider = ({ children }) => {
       // add other data later...
     };
 
-    const dbKey = 'CampusKing_v3.8.0_' + user.uid;
+    const uid = user.id || user.uid;
+    const dbKey = 'CampusKing_v3.8.0_' + uid;
     localStorage.setItem(dbKey, JSON.stringify(storageObj));
 
     try {
-      storageObj.lastUpdated = serverTimestamp();
-      await setDoc(doc(db, "users", user.uid), storageObj, { merge: true });
+      storageObj.lastUpdated = new Date().toISOString();
+      const { error } = await supabase
+        .from('users')
+        .upsert({ id: uid, data: storageObj });
+      if (error) throw error;
     } catch (error) {
       console.error("雲端備份失敗: ", error);
     }
